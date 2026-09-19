@@ -1,3 +1,3 @@
-# names of people in projec
+# COSC 4353 Group Project Teamates
 
 - Jester Santos
