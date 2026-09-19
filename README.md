@@ -1,3 +1,3 @@
-# names of people in project
+# names of people in projec
 
 - Jester Santos
