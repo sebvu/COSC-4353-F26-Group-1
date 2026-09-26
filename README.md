@@ -2,3 +2,4 @@
 
 - Jester Santos
 - Vanessa Meyer
+- Cristal Marcial-Pullen
