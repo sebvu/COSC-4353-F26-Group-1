@@ -4,3 +4,4 @@
 - Vanessa Meyer
 - Cristal Marcial-Pullen
 - Emokhare Igene
+- Karam Irshaid
