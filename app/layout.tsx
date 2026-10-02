@@ -21,7 +21,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body data-new-gr-c-s-check-loaded="8.937.0" data-gr-ext-installed="">
+        {children}
+      </body>
     </html>
     // <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
     //   <body>{children}</body>
