@@ -5,7 +5,7 @@
 - Emokhare Igene
 - Karam Irshaid
 
-## Technology Stack
+## Frontend Technology Stack
 
 For our framework, we are choosing the React/NextJS stack with typescript as our language. I'll give a sensible, student explanation, on why we're choosing this.
 
