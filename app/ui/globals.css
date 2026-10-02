@@ -1,49 +1,219 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* === SIZE CONTEXT TUNER VARIABLES === */
+
+  /* base variables 
+  - static variables all sizes are based off of */
+  --base-size: 0.75rem;
+  --base-response: 1vw;
+  --base-static-multiplier: 2.5; /* increase static regular base */
+
+  /* clamp multipliers
+  - determine ratio relative to base to clamp */
+  --lower-clamp-ratio: 0.5;
+  --higher-clamp-ratio: 2;
+
+  /* scale multipliers 
+   - the ratio of scale up/down for every size change */
+  --size-scale-down-ratio: 0.8;
+  --size-scale-up-ratio: 1.2;
+
+  /* === DYANMIC SIZE CONTEXT VARIABLES === */
+
+  --size-rg: clamp(
+    var(--base-size) * var(--lower-clamp-ratio),
+    var(--base-size) + var(--base-response),
+    var(--base-size) * var(--higher-clamp-ratio)
+  );
+
+  /* smaller */
+  --size-sm: calc(var(--size-rg) * var(--size-scale-down-ratio));
+  --size-xs: calc(var(--size-sm) * var(--size-scale-down-ratio));
+  --size-xxs: calc(var(--size-xs) * var(--size-scale-down-ratio));
+  --size-xxxs: calc(var(--size-xxs) * var(--size-scale-down-ratio));
+  /* larger */
+  --size-md: calc(var(--size-rg) * var(--size-scale-up-ratio));
+  --size-lg: calc(var(--size-md) * var(--size-scale-up-ratio));
+  --size-xl: calc(var(--size-lg) * var(--size-scale-up-ratio));
+  --size-xxl: calc(var(--size-xl) * var(--size-scale-up-ratio));
+  --size-xxxl: calc(var(--size-xxl) * var(--size-scale-up-ratio));
+
+  /* === STATIC SIZE CONTEXT VARIABLES === */
+  --size-rg-static: calc(var(--base-size) * var(--base-static-multiplier));
+  /* smaller */
+  --size-sm-static: calc(var(--size-rg-static) * var(--size-scale-down-ratio));
+  --size-xs-static: calc(var(--size-sm-static) * var(--size-scale-down-ratio));
+  --size-xxs-static: calc(var(--size-xs-static) * var(--size-scale-down-ratio));
+  --size-xxxs-static: calc(
+    var(--size-xxs-static) * var(--size-scale-down-ratio)
+  );
+  /* larger */
+  --size-md-static: calc(var(--size-rg-static) * var(--size-scale-up-ratio));
+  --size-lg-static: calc(var(--size-md-static) * var(--size-scale-up-ratio));
+  --size-xl-static: calc(var(--size-lg-static) * var(--size-scale-up-ratio));
+  --size-xxl-static: calc(var(--size-xl-static) * var(--size-scale-up-ratio));
+  --size-xxxl-static: calc(var(--size-xxl-static) * var(--size-scale-up-ratio));
+
+  /* === COLOR SCHEMES === */
+  /* Catppuccin Color Schemes, Macchiato & Latte */
+  /* referred to style guides https://github.com/catppuccin/catppuccin/blob/main/docs/style-guide.md*/
+
+  /*
+		NOTE: this is a GUIDELINE, please use colors to your discretion, seriously.
+	*/
+
+  /* cross colors */
+  --cross-dark-text: #181926;
+
+  /* light theme (default) */
+
+  /* background colors */
+  --background-pane: #eff1f5;
+  --secondary-pane1: #e6e9ef;
+  --secondary-pane2: #dce0e8;
+  --overlay2-color: #7c7f93;
+  --overlay1-color: #8c8fa1;
+  --overlay0-color: #9ca0b0;
+  --surface2-color: #acb0be;
+  --surface1-color: #bcc0cc;
+  --surface0-color: #ccd0da;
+
+  /* typography */
+  --text-color: #4c4f69;
+  --subtext1-color: #5c5f77;
+  --subtext0-color: #6c6f85;
+  --link-tags-pills-color: #1e66f5;
+  --success-color: #40a02b;
+  --warning-color: #df8e1d;
+  --error-color: #d20f39;
+  --selection-bacground: rgb(from #7c7f93 r g b / 30%);
+  --cursor-background: #dc8a78;
+
+  /* general colors */
+  --rosewater-color: #dc8a78;
+  --flamingo-color: #dd7878;
+  --pink-color: #ea76cb;
+  --mauve-color: #8839ef;
+  --red-color: #d20f39;
+  --maroon-color: #e64553;
+  --peach-color: #fe640b;
+  --yellow-color: #df8e1d;
+  --green-color: #40a02b;
+  --teal-color: #179299;
+  --sky-color: #04a5e5;
+  --sapphire-color: #209fb5;
+  --blue-color: #1e66f5;
+  --lavender-color: #7287fd;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root[data-theme="dark"] {
+  /* dark theme */
+
+  /* background colors */
+  --background-pane: #24273a;
+  --secondary-pane1: #1e2030;
+  --secondary-pane2: #181926;
+  --overlay2-color: #939ab7;
+  --overlay1-color: #8087a2;
+  --overlay0-color: #6e738d;
+  --surface2-color: #5b6078;
+  --surface1-color: #494d64;
+  --surface0-color: #363a4f;
+
+  /* typography */
+  --text-color: #cad3f5;
+  --subtext1-color: #b8c0e0;
+  --subtext0-color: #a5adcb;
+  --link-tags-pills-color: #8aadf4;
+  --success-color: #a6da95;
+  --warning-color: #eed49f;
+  --error-color: #ed8796;
+  --selection-bacground: rgb(from #939ab7 r g b / 30%);
+  --cursor-background: #f4bdc6;
+
+  /* general colors */
+  --rosewater-color: #f4dbd6;
+  --flamingo-color: #f0c6c6;
+  --pink-color: #f5bde6;
+  --mauve-color: #c6a0f6;
+  --red-color: #ed8796;
+  --maroon-color: #ee99a0;
+  --peach-color: #f5a97f;
+  --yellow-color: #eed49f;
+  --green-color: #a6da95;
+  --teal-color: #8bd5ca;
+  --sky-color: #91d7e3;
+  --sapphire-color: #7dc4e4;
+  --blue-color: #8aadf4;
+  --lavender-color: #b7bdf8;
 }
 
-html {
-  height: 100%;
+/* === STREAMLINED ATTRIBUTE ACCESSORS === */
+
+/* Matches any element containing a class that starts with --context- */
+[class*="--context-"] {
+  --size: var(--size-rg); /* sensible fallback default */
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+/* Dynamic contexts */
+[class*="--context-xxxs"] {
+  --size: var(--size-xxxs);
+}
+[class*="--context-xxs"] {
+  --size: var(--size-xxs);
+}
+[class*="--context-xs"] {
+  --size: var(--size-xs);
+}
+[class*="--context-sm"] {
+  --size: var(--size-sm);
+}
+[class*="--context-rg"] {
+  --size: var(--size-rg);
+}
+[class*="--context-md"] {
+  --size: var(--size-md);
+}
+[class*="--context-lg"] {
+  --size: var(--size-lg);
+}
+[class*="--context-xl"] {
+  --size: var(--size-xl);
+}
+[class*="--context-xxl"] {
+  --size: var(--size-xxl);
+}
+[class*="--context-xxxl"] {
+  --size: var(--size-xxxl);
 }
 
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Static contexts */
+[class*="--context-xxxs-static"] {
+  --size: var(--size-xxxs-static);
 }
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+[class*="--context-xxs-static"] {
+  --size: var(--size-xxs-static);
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
+[class*="--context-xs-static"] {
+  --size: var(--size-xs-static);
 }
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+[class*="--context-sm-static"] {
+  --size: var(--size-sm-static);
+}
+[class*="--context-rg-static"] {
+  --size: var(--size-rg-static);
+}
+[class*="--context-md-static"] {
+  --size: var(--size-md-static);
+}
+[class*="--context-lg-static"] {
+  --size: var(--size-lg-static);
+}
+[class*="--context-xl-static"] {
+  --size: var(--size-xl-static);
+}
+[class*="--context-xxl-static"] {
+  --size: var(--size-xxl-static);
+}
+[class*="--context-xxxl-static"] {
+  --size: var(--size-xxxl-static);
 }
