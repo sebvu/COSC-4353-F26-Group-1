@@ -8,9 +8,8 @@ body {
   min-height: 100vh;
 }
 
-.main div {
+.main > div {
   border: 1px rgb(41, 44, 60) solid;
-  width: 100%;
 }
 
 .mainContent {
@@ -27,11 +26,27 @@ body {
   flex: 0 0 20%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 4em;
 }
 
 .queueListContainer h1 {
   text-align: center;
+}
+
+.createQueueButton {
+  margin: 1em;
+  align-self: center;
+  width: 8em;
+  height: 2em;
+  border: 0;
+  background-color: rgb(153, 209, 219);
+  border-radius: 1em;
+  font-size: 2em;
+}
+
+.createQueueButton:hover {
+  background-color: rgb(140, 170, 238)
 }
 
 .queueList {
@@ -41,7 +56,10 @@ body {
   min-width: 20em;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  width: 100%;
   gap: 1.5em;
+  margin: 0;
   padding: 0;
 }
 

@@ -1,24 +1,30 @@
+"use client";
+
 import styles from "@/app/ui/admin-dashboard/admin-dashboard.module.css";
-
-function createQueue() {
-
-}
-
-function createButton() {
-
-}
+import { useState } from "react";
 
 export default function Page() {
+  const [queues, setQueues] = useState<string[]>([]);
+
+  function createQueue () {
+    setQueues((currentQueues) => [...currentQueues, "queue"])
+  }
+
+
   return (
     // must always return a root!
     <div className={styles.main}>
       <div className={styles.queueListContainer}>
-        <h1>Hi this is the queue list sidebar</h1>
-        <button className={styles.createQueueButton}>Create Queue</button>
+        <h1>Queue List</h1>
+        <button onClick={createQueue} className={styles.createQueueButton}>
+          Create Queue
+        </button>
         <ul className={styles.queueList}>
-          <li className={styles.queueItem}>queue 1</li>
-          <li className={styles.queueItem}>queue 2</li>
-          <li className={styles.queueItem}>queue 3</li>
+          {queues.map((queue, index) => (
+            <li key={index} className={styles.queueItem}>
+              {queue}
+            </li>
+          ))}
         </ul>
       </div>
       <div className={styles.mainContent}>
