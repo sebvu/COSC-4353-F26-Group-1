@@ -6,7 +6,7 @@ import { useState } from "react";
 class Queue {
   id: number;
   name: string;
-  currQueueLength: number; // in minutes
+  currQueueLength: number;
   constructor(id: number, name: string, currQueueLength: number) {
     this.id = id;
     this.name = name;
@@ -46,8 +46,22 @@ export default function Page() {
         </ul>
       </div>
       <div className={styles.mainContent}>
-        <h1>example admin dashboard fuck fuck fuck</h1>
-        <p className={styles.text}>this is 100% a button FUCK!</p>
+        <ul className={styles.queuePanel}>
+          {queues.map((queue) => (
+            <li key={queue.id} className={styles.panelItem}>
+              <div className={styles.panelItemInfo}>
+                <p>{"Name: " + queue.name}</p>
+                <p>{"ID: " + queue.id}</p>
+                <p>{queue.currQueueLength + " in Line"}</p>
+              </div>
+
+              <div className={styles.panelItemButtons}>
+                <button>Open/Close</button>
+                <button>Delete Queue</button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
