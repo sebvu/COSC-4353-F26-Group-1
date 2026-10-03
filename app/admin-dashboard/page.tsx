@@ -21,6 +21,9 @@ class Queue {
 export default function Page() {
   const [queues, setQueues] = useState<Queue[]>([]);
 
+  let isHome = false;
+  let currQueue = queues.at(0);
+
   function createQueue () {
     const newQueue = new Queue(Date.now(), "queue", 12);
 
@@ -38,42 +41,58 @@ export default function Page() {
     queue.open = (queue.open ? false : true);
   }
 
+  function QueueList() {
+    return (
+      <div className={styles.queueListContainer}>
+          <h1>Queue List</h1>
+          <button onClick={createQueue} className={styles.createQueueButton}>
+            Create Queue
+          </button>
+          <ul className={styles.queueList}>
+            {queues.map((queue) => (
+              <li key={queue.id} className={styles.queueItem}>
+                {queue.name}
+              </li>
+            ))}
+          </ul>
+      </div>
+    )
+  }
+
+  function Panel() {
+    return (
+      <div className={styles.mainContent}>
+          <ul className={styles.queuePanel}>
+            {queues.map((queue) => (
+              <li key={queue.id} className={styles.panelItem}>
+                <div className={styles.panelItemInfo}>
+                  <p>{"Name: " + queue.name}</p>
+                  <p>{"ID: " + queue.id}</p>
+                  <p>{"Status: " + (queue.open ? "Open" : "Closed")}</p>
+                  <p>{queue.currQueueLength + " in Line"}</p>
+                </div>
+
+                <div className={styles.panelItemButtons}>
+                  <button onClick={() => updateQueueStatus(queue)}>Open/Close</button>
+                  <button>Manage Queue</button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+    )
+  }
+
+  function ManageQueue(queue: Queue) {
+
+  }
 
   return (
     // must always return a root!
     <div className={styles.main}>
-      <div className={styles.queueListContainer}>
-        <h1>Queue List</h1>
-        <button onClick={createQueue} className={styles.createQueueButton}>
-          Create Queue
-        </button>
-        <ul className={styles.queueList}>
-          {queues.map((queue) => (
-            <li key={queue.id} className={styles.queueItem}>
-              {queue.name}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className={styles.mainContent}>
-        <ul className={styles.queuePanel}>
-          {queues.map((queue) => (
-            <li key={queue.id} className={styles.panelItem}>
-              <div className={styles.panelItemInfo}>
-                <p>{"Name: " + queue.name}</p>
-                <p>{"ID: " + queue.id}</p>
-                <p>{"Status: " + (queue.open ? "Open" : "Closed")}</p>
-                <p>{queue.currQueueLength + " in Line"}</p>
-              </div>
-
-              <div className={styles.panelItemButtons}>
-                <button onClick={() => updateQueueStatus(queue)}>Open/Close</button>
-                <button onClick={() => deleteQueue(queue.id)}>Delete Queue</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <QueueList/>
+      
+      <Panel/>
     </div>
   );
 }
