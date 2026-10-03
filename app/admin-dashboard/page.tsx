@@ -19,30 +19,32 @@ class Queue {
   open: boolean;
   users: User[];
   currentUser: User | null;
-  constructor(id: number, name: string) {
+  expectedDuration: number;
+  description: string;
+  constructor(id: number, name: string, description: string, expectedDuration: number) {
     this.id = id;
     this.name = name;
     this.currQueueLength = 0;
     this.open = true;
     this.users = [];
     this.currentUser = null;
+    this.description = description;
+    this.expectedDuration = expectedDuration;
   }
 
   addUser(user: User) {
     this.users.push(user);
-    this.currQueueLength = this.users.length;
+    this.currQueueLength = this.currQueueLength + 1;
   }
 
   removeUser(user: User) {
     this.users = this.users.filter((currentUser) => currentUser !== user);
-    this.currQueueLength = this.users.length;
+    this.currQueueLength = this.currQueueLength - 1;
   }
 
   serviceNextUser() {
-    if (this.currQueueLength > 0) {
-      this.users.pop();
-      this.currQueueLength = this.users.length;
-    }
+    this.users.pop();
+    this.currQueueLength = this.users.length;
   }
 }
 
@@ -55,7 +57,7 @@ export default function Page() {
 
 
   function createQueue () {
-    const newQueue = new Queue(Date.now(), "queue");
+    const newQueue = new Queue(Date.now(), "queue", "is a queue :D", 23);
 
     setQueues((currentQueues) => [
       ...currentQueues,
@@ -103,7 +105,7 @@ export default function Page() {
                   <p>{"Name: " + queue.name}</p>
                   <p>{"ID: " + queue.id}</p>
                   <p>{"Status: " + (queue.open ? "Open" : "Closed")}</p>
-                  <p>{queue.currQueueLength + " in Line"}</p>
+                  <p>{queue.expectedDuration + " minute wait"}</p>
                 </div>
 
                 <div className={styles.panelItemButtons}>
@@ -120,14 +122,23 @@ export default function Page() {
   function ManageQueue() {
     return (
       <div className={styles.mainContent}>
-        <h1>{selectedQueue?.name}</h1>
-        <p>{selectedQueue?.id}</p>
-        <p>{selectedQueue?.open ? "Open" : "Closed"}</p>
-        <p>{selectedQueue?.currQueueLength + " in Line"}</p>
-        <p>{"Current User: " + (selectedQueue?.currentUser ? selectedQueue?.currentUser : "None")}</p>
-        <button onClick={selectedQueue?.serviceNextUser}>Service Next User</button>
-        <button onClick={() => selectedQueue?.addUser(new User(Date.now(), "hi"))}>Add hi</button>
-        <ul>
+        <div className={styles.manageTitle}>
+          <span>{selectedQueue?.name}</span>
+          <span>{"ID: " + selectedQueue?.id}</span>
+        </div>
+        <div className={styles.description}>Description: {selectedQueue?.description}</div>
+        <div className={styles.divider}></div>
+        <div className={styles.queueStatusInfo}>
+          <p>{selectedQueue?.open ? "Open" : "Closed"}</p>
+          <p>{selectedQueue?.currQueueLength + " in Line"}</p>
+          <p>{selectedQueue?.expectedDuration + " minute wait"}</p>
+          <p>{"Current User: " + (selectedQueue?.currentUser ? selectedQueue?.currentUser : "None")}</p>
+        </div>
+        <div className={styles.queueActions}>
+          <button onClick={selectedQueue?.serviceNextUser}>Service Next User</button>
+          <button onClick={() => selectedQueue?.addUser(new User(Date.now(), "hi"))}>Add hi</button>
+        </div>
+        <ul className={styles.manageUsersList}>
           {selectedQueue?.users.map((user) => (
             <li key={user.id}>
               {user.name}
