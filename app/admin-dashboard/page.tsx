@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "@/app/ui/admin-dashboard/admin-dashboard.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 class User {
   id: number;
@@ -53,16 +53,35 @@ class Queue {
 export default function Page() {
   const [queues, setQueues] = useState<Queue[]>([]);
   const [selectedQueueId, setSelectedQueueId] = useState<number | null>(null);
+  const [expectedDuration, setExpectedDuration] = useState("");
+  const [creatingQueue, setCreatingQueue] = useState(false);
+  const [queueName, setQueueName] = useState("");
+  const [queueDescription, setQueueDescription] = useState("");
   const selectedQueue = queues.find((queue) => queue.id === selectedQueueId);
 
+  const currQueueId = useRef(1);
 
-  function createQueue () {
-    const newQueue = new Queue(Date.now(), "queue", "is a queue :D", 23);
+  function createQueue(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const newQueue = new Queue(
+      currQueueId.current,
+      queueName,
+      queueDescription,
+      Number(expectedDuration),
+    );
+
+    currQueueId.current += 1;
 
     setQueues((currentQueues) => [
       ...currentQueues,
       newQueue,
     ]);
+
+    setQueueName("");
+    setQueueDescription("");
+    setExpectedDuration("");
+    setCreatingQueue(false);
   }
 
   function deleteQueue(id: number) {
@@ -78,9 +97,51 @@ export default function Page() {
     return (
       <div className={styles.queueListContainer}>
           <h1 onClick={() => setSelectedQueueId(null)}>Queue List</h1>
-          <button onClick={createQueue} className={styles.createQueueButton}>
+          {creatingQueue ? (
+          <form onSubmit={createQueue}>
+            <input
+              type="text"
+              placeholder="Queue name"
+              value={queueName}
+              onChange={(e) => setQueueName(e.target.value)}
+              required
+            />
+
+            <textarea
+              placeholder="Description"
+              value={queueDescription}
+              onChange={(e) => setQueueDescription(e.target.value)}
+              required
+            />
+
+            <input
+              type="number"
+              placeholder="Expected duration (minutes)"
+              value={expectedDuration}
+              onChange={(e) => setExpectedDuration(e.target.value)}
+              min="1"
+              required
+            />
+
+            <button type="submit">
+              Create
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setCreatingQueue(false)}
+            >
+              Cancel
+            </button>
+          </form>
+        ) : (
+          <button
+            className={styles.createQueueButton}
+            onClick={() => setCreatingQueue(true)}
+          >
             Create Queue
           </button>
+        )}
           <ul className={styles.queueList}>
             {queues.map((queue) => (
               <li
