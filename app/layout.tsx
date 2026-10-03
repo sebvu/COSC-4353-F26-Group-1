@@ -4,7 +4,7 @@ import "./ui/reset.css";
 import "./ui/globals.css";
 import "./ui/style.css";
 import { NotificationProvider } from "./lib/NotificationContext";
-import { QueueProvider } from "./lib/QueueContext";
+import Toast from "./ui/Toast";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -25,9 +25,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body data-new-gr-c-s-check-loaded="8.937.0" data-gr-ext-installed="">
-        <QueueProvider>
-          <NotificationProvider>{children}</NotificationProvider>
-        </QueueProvider>
+        <NotificationProvider>
+          {children}
+          <Toast />
+        </NotificationProvider>
       </body>
     </html>
     // <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
