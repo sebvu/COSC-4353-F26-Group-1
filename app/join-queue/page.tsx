@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { mockServices } from "../lib/mockData";
 import { useQueue } from "../lib/QueueContext";
+import styles from "../ui/join-queue/join-queue.module.css";
 
 export default function JoinQueuePage() {
   const [selectedServiceId, setSelectedServiceId] = useState("");
@@ -21,57 +22,59 @@ export default function JoinQueuePage() {
   }
 
   return (
-    <main>
+    <main className={styles.container}>
       <h1>Join Queue</h1>
 
       <p>Select a service to join.</p>
 
-      <select
-        value={selectedServiceId}
-        onChange={(event) => setSelectedServiceId(event.target.value)}
-      >
-        <option value="">Select a service</option>
+      <div className={styles.card}>
+        <select
+          value={selectedServiceId}
+          onChange={(event) => setSelectedServiceId(event.target.value)}
+        >
+          <option value="">Select a service</option>
 
-        {mockServices.map((service) => (
-          <option
-            key={service.id}
-            value={service.id}
-            disabled={!service.isOpen}
-          >
-            {service.name}
-            {!service.isOpen ? " (Closed)" : ""}
-          </option>
-        ))}
-      </select>
+          {mockServices.map((service) => (
+            <option
+              key={service.id}
+              value={service.id}
+              disabled={!service.isOpen}
+            >
+              {service.name}
+              {!service.isOpen ? " (Closed)" : ""}
+            </option>
+          ))}
+        </select>
 
-      {selectedService && (
-        <div>
-          <h2>{selectedService.name}</h2>
+        {selectedService && (
+          <div>
+            <h2>{selectedService.name}</h2>
 
-          <p>{selectedService.description}</p>
+            <p>{selectedService.description}</p>
 
-          <p>
-            Estimated wait: {selectedService.estimatedWaitMinutes} minutes
-          </p>
+            <p>
+              Estimated wait: {selectedService.estimatedWaitMinutes} minutes
+            </p>
 
-          <p>People in queue: {selectedService.queueLength}</p>
+            <p>People in queue: {selectedService.queueLength}</p>
 
-          <button
-            onClick={handleJoin}
-            disabled={!selectedService.isOpen}
-          >
-            Join Queue
-          </button>
-        </div>
-      )}
+            <button
+              onClick={handleJoin}
+              disabled={!selectedService.isOpen}
+            >
+              Join Queue
+            </button>
+          </div>
+        )}
 
-      {queueEntry && (
-        <div>
-          <p>You are currently in a queue.</p>
+        {queueEntry && (
+          <div>
+            <p>You are currently in a queue.</p>
 
-          <button onClick={leaveQueue}>Leave Queue</button>
-        </div>
-      )}
+            <button onClick={leaveQueue}>Leave Queue</button>
+          </div>
+        )}
+      </div>
     </main>
   );
 }
