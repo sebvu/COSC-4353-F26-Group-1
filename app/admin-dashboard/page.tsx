@@ -7,10 +7,12 @@ class Queue {
   id: number;
   name: string;
   currQueueLength: number;
+  open: boolean;
   constructor(id: number, name: string, currQueueLength: number) {
     this.id = id;
     this.name = name;
     this.currQueueLength = currQueueLength
+    this.open = true;
   }
 }
 
@@ -20,12 +22,20 @@ export default function Page() {
   const [queues, setQueues] = useState<Queue[]>([]);
 
   function createQueue () {
-    const newQueue = new Queue(queues.length + 1, "queue", 12);
+    const newQueue = new Queue(Date.now(), "queue", 12);
 
     setQueues((currentQueues) => [
       ...currentQueues,
       newQueue,
     ]);
+  }
+
+  function deleteQueue(id: number) {
+    setQueues((currentQueues) => currentQueues.filter((queue) => queue.id !== id))
+  }
+
+  function updateQueueStatus(queue: Queue) {
+    queue.open = (queue.open ? false : true);
   }
 
 
@@ -52,12 +62,13 @@ export default function Page() {
               <div className={styles.panelItemInfo}>
                 <p>{"Name: " + queue.name}</p>
                 <p>{"ID: " + queue.id}</p>
+                <p>{"Status: " + (queue.open ? "Open" : "Closed")}</p>
                 <p>{queue.currQueueLength + " in Line"}</p>
               </div>
 
               <div className={styles.panelItemButtons}>
-                <button>Open/Close</button>
-                <button>Delete Queue</button>
+                <button onClick={() => updateQueueStatus(queue)}>Open/Close</button>
+                <button onClick={() => deleteQueue(queue.id)}>Delete Queue</button>
               </div>
             </li>
           ))}
