@@ -3,16 +3,46 @@
 import styles from "@/app/ui/admin-dashboard/admin-dashboard.module.css";
 import { useState } from "react";
 
+class User {
+  id: number;
+  name: string;
+  constructor(id: number, name: string) {
+    this.id = id;
+    this.name = name;
+  }
+}
+
 class Queue {
   id: number;
   name: string;
   currQueueLength: number;
   open: boolean;
-  constructor(id: number, name: string, currQueueLength: number) {
+  users: User[];
+  currentUser: User | null;
+  constructor(id: number, name: string) {
     this.id = id;
     this.name = name;
-    this.currQueueLength = currQueueLength
+    this.currQueueLength = 0;
     this.open = true;
+    this.users = [];
+    this.currentUser = null;
+  }
+
+  addUser(user: User) {
+    this.users.push(user);
+    this.currQueueLength = this.users.length;
+  }
+
+  removeUser(user: User) {
+    this.users = this.users.filter((currentUser) => currentUser !== user);
+    this.currQueueLength = this.users.length;
+  }
+
+  serviceNextUser() {
+    if (this.currQueueLength > 0) {
+      this.users.pop();
+      this.currQueueLength = this.users.length;
+    }
   }
 }
 
@@ -25,7 +55,7 @@ export default function Page() {
 
 
   function createQueue () {
-    const newQueue = new Queue(Date.now(), "queue", 12);
+    const newQueue = new Queue(Date.now(), "queue");
 
     setQueues((currentQueues) => [
       ...currentQueues,
@@ -90,7 +120,21 @@ export default function Page() {
   function ManageQueue() {
     return (
       <div className={styles.mainContent}>
-
+        <h1>{selectedQueue?.name}</h1>
+        <p>{selectedQueue?.id}</p>
+        <p>{selectedQueue?.open ? "Open" : "Closed"}</p>
+        <p>{selectedQueue?.currQueueLength + " in Line"}</p>
+        <p>{"Current User: " + (selectedQueue?.currentUser ? selectedQueue?.currentUser : "None")}</p>
+        <button onClick={selectedQueue?.serviceNextUser}>Service Next User</button>
+        <button onClick={() => selectedQueue?.addUser(new User(Date.now(), "hi"))}>Add hi</button>
+        <ul>
+          {selectedQueue?.users.map((user) => (
+            <li key={user.id}>
+              {user.name}
+              <button onClick={() => selectedQueue.removeUser(user)}>Remove</button>
+            </li>
+          ))}
+        </ul>
       </div>
     )
   }
@@ -100,7 +144,7 @@ export default function Page() {
     <div className={styles.main}>
       <QueueList/>
       {selectedQueue ? (
-        <ManageQueue queue={selectedQueue}/>
+        <ManageQueue/>
       ) : (
         <Panel />
       )}
