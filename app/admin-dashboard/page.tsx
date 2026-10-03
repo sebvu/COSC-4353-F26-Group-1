@@ -136,7 +136,7 @@ export default function Page() {
         </div>
         <div className={styles.queueActions}>
           <button onClick={selectedQueue?.serviceNextUser}>Service Next User</button>
-          <button onClick={() => selectedQueue?.addUser(new User(Date.now(), "hi"))}>Add hi</button>
+          <button onClick={() => selectedQueue?.addUser(new User(Date.now(), "TestUser"))}>Add TestUser</button>
         </div>
         <ul className={styles.manageUsersList}>
           {selectedQueue?.users.map((user) => (
