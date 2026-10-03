@@ -1,0 +1,307 @@
+/* Uses the shared Catppuccin variables from app/ui/globals.css.
+   Card, border, and spacing values follow notifications.module.css. */
+
+.page {
+  max-width: 60rem;
+  margin-inline: auto;
+  padding: 2rem 1.25rem 4rem;
+  color: var(--text-color);
+}
+
+.title {
+  margin-bottom: 1.25rem;
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+/* ---- Queue status card ---- */
+
+.statusCard {
+  margin-bottom: 1.25rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+  border: 1px solid var(--surface0-color);
+  border-radius: 0.875rem;
+  background: var(--secondary-pane1);
+}
+
+.statusTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.serviceName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--surface1-color);
+  border-radius: 1rem;
+  background: var(--background-pane);
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--overlay1-color);
+}
+
+.waiting .dot {
+  background: var(--blue-color);
+}
+
+.almostReady .dot {
+  background: var(--yellow-color);
+}
+
+.served .dot {
+  background: var(--green-color);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-top: 1.25rem;
+}
+
+.statLabel {
+  color: var(--subtext1-color);
+  font-size: 0.8125rem;
+}
+
+.statValue {
+  margin-top: 0.125rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hint {
+  margin-top: 1.25rem;
+  color: var(--subtext1-color);
+  font-size: 0.9375rem;
+}
+
+.primaryLink {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.5rem;
+  background: var(--mauve-color);
+  color: var(--cross-dark-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.primaryLink:hover {
+  background: color-mix(in srgb, var(--mauve-color) 85%, var(--text-color));
+}
+
+/* ---- Two-column area ---- */
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 52rem) {
+  .columns {
+    grid-template-columns: 1.3fr 1fr;
+    align-items: start;
+  }
+}
+
+.panel {
+  padding: 1.25rem;
+  border: 1px solid var(--surface0-color);
+  border-radius: 0.875rem;
+  background: var(--secondary-pane1);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.unreadCount {
+  color: var(--subtext1-color);
+  font-size: 0.875rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.75rem;
+}
+
+.meta {
+  margin-top: 0.125rem;
+  color: var(--subtext1-color);
+  font-size: 0.8125rem;
+}
+
+.sep {
+  margin-inline: 0.5rem;
+  color: var(--overlay1-color);
+}
+
+/* ---- Services ---- */
+
+.serviceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+}
+
+.serviceRow + .serviceRow {
+  border-top: 1px solid var(--surface0-color);
+}
+
+.serviceTitle {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.joinLink {
+  flex-shrink: 0;
+  padding: 0.375rem 0.875rem;
+  border: 1px solid var(--surface1-color);
+  border-radius: 0.5rem;
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.joinLink:hover {
+  background: var(--surface0-color);
+}
+
+.joined {
+  flex-shrink: 0;
+  color: var(--mauve-color);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.note {
+  margin-top: 0.75rem;
+  color: var(--subtext1-color);
+  font-size: 0.8125rem;
+}
+
+/* ---- Notifications summary ---- */
+
+.noteRow {
+  padding: 0.75rem 0.75rem;
+  margin-inline: -0.75rem;
+  border-radius: 0.5rem;
+}
+
+.noteMessage {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.unread {
+  background: color-mix(in srgb, var(--mauve-color) 9%, var(--secondary-pane1));
+}
+
+.unread .noteMessage {
+  font-weight: 600;
+}
+
+.read .noteMessage {
+  color: var(--subtext1-color);
+}
+
+.viewAll {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--mauve-color);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+}
+
+/* ---- Empty states ---- */
+
+.emptyInline {
+  margin-top: 0.75rem;
+}
+
+.emptyTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.emptyText {
+  margin-top: 0.375rem;
+  color: var(--subtext1-color);
+  font-size: 0.9375rem;
+}
+
+/* ---- Focus + utilities ---- */
+
+.primaryLink:focus-visible,
+.joinLink:focus-visible,
+.viewAll:focus-visible {
+  outline: 2px solid var(--mauve-color);
+  outline-offset: 2px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- Small screens ---- */
+
+@media (max-width: 34rem) {
+  .page {
+    padding-top: 1.5rem;
+  }
+
+  .stats {
+    gap: 1.5rem;
+  }
+
+  .serviceRow {
+    align-items: flex-start;
+  }
+}
