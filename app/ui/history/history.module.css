@@ -1,0 +1,178 @@
+
+.page {
+  max-width: 44rem;
+  margin-inline: auto;
+  padding: 2rem 1.25rem 4rem;
+  color: var(--text-color);
+}
+
+/* ---- Header ---- */
+
+.header {
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.summary {
+  margin-top: 0.25rem;
+  color: var(--subtext1-color);
+  font-size: 0.9375rem;
+}
+
+/* ---- Table ---- */
+
+.card {
+  overflow-x: auto;
+  border: 1px solid var(--surface0-color);
+  border-radius: 0.875rem;
+  background: var(--secondary-pane1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th {
+  padding: 0.75rem 1.125rem;
+  border-bottom: 1px solid var(--surface0-color);
+  color: var(--subtext1-color);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.row + .row {
+  border-top: 1px solid var(--surface0-color);
+}
+
+.date,
+.service,
+.outcomeCell {
+  padding: 0.875rem 1.125rem;
+  vertical-align: middle;
+}
+
+.date {
+  color: var(--subtext1-color);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+}
+
+.service {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ---- Outcome badge (same pattern as the dashboard status badge) ---- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--surface1-color);
+  border-radius: 1rem;
+  background: var(--background-pane);
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--overlay1-color);
+}
+
+.served .dot {
+  background: var(--green-color);
+}
+
+.left .dot {
+  background: var(--yellow-color);
+}
+
+.removed .dot {
+  background: var(--red-color);
+}
+
+/* ---- Empty state ---- */
+
+.empty {
+  padding: 3rem 1.5rem;
+  border: 1px dashed var(--surface1-color);
+  border-radius: 0.875rem;
+  text-align: center;
+}
+
+.emptyTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.emptyText {
+  max-width: 28rem;
+  margin: 0.375rem auto 0;
+  color: var(--subtext1-color);
+}
+
+.emptyLink {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--mauve-color);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.emptyLink:hover {
+  text-decoration: underline;
+}
+
+.emptyLink:focus-visible {
+  outline: 2px solid var(--mauve-color);
+  outline-offset: 2px;
+}
+
+/* ---- Utilities ---- */
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- Small screens ---- */
+
+@media (max-width: 34rem) {
+  .page {
+    padding-top: 1.5rem;
+  }
+
+  .th,
+  .date,
+  .service,
+  .outcomeCell {
+    padding-inline: 0.75rem;
+  }
+
+  .date {
+    font-size: 0.8125rem;
+  }
+
+  .service {
+    font-size: 0.9375rem;
+  }
+}
