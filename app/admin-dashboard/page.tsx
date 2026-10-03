@@ -3,11 +3,29 @@
 import styles from "@/app/ui/admin-dashboard/admin-dashboard.module.css";
 import { useState } from "react";
 
+class Queue {
+  id: number;
+  name: string;
+  currQueueLength: number; // in minutes
+  constructor(id: number, name: string, currQueueLength: number) {
+    this.id = id;
+    this.name = name;
+    this.currQueueLength = currQueueLength
+  }
+}
+
+
+
 export default function Page() {
-  const [queues, setQueues] = useState<string[]>([]);
+  const [queues, setQueues] = useState<Queue[]>([]);
 
   function createQueue () {
-    setQueues((currentQueues) => [...currentQueues, "queue"])
+    const newQueue = new Queue(queues.length + 1, "queue", 12);
+
+    setQueues((currentQueues) => [
+      ...currentQueues,
+      newQueue,
+    ]);
   }
 
 
@@ -20,9 +38,9 @@ export default function Page() {
           Create Queue
         </button>
         <ul className={styles.queueList}>
-          {queues.map((queue, index) => (
-            <li key={index} className={styles.queueItem}>
-              {queue}
+          {queues.map((queue) => (
+            <li key={queue.id} className={styles.queueItem}>
+              {queue.name}
             </li>
           ))}
         </ul>
