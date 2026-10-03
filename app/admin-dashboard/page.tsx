@@ -20,9 +20,9 @@ class Queue {
 
 export default function Page() {
   const [queues, setQueues] = useState<Queue[]>([]);
+  const [selectedQueueId, setSelectedQueueId] = useState<number | null>(null);
+  const selectedQueue = queues.find((queue) => queue.id === selectedQueueId);
 
-  let isHome = false;
-  let currQueue = queues.at(0);
 
   function createQueue () {
     const newQueue = new Queue(Date.now(), "queue", 12);
@@ -41,16 +41,20 @@ export default function Page() {
     queue.open = (queue.open ? false : true);
   }
 
+
   function QueueList() {
     return (
       <div className={styles.queueListContainer}>
-          <h1>Queue List</h1>
+          <h1 onClick={() => setSelectedQueueId(null)}>Queue List</h1>
           <button onClick={createQueue} className={styles.createQueueButton}>
             Create Queue
           </button>
           <ul className={styles.queueList}>
             {queues.map((queue) => (
-              <li key={queue.id} className={styles.queueItem}>
+              <li
+                key={queue.id}
+                className={styles.queueItem}
+                onClick={() => setSelectedQueueId(queue.id)}>
                 {queue.name}
               </li>
             ))}
@@ -74,7 +78,7 @@ export default function Page() {
 
                 <div className={styles.panelItemButtons}>
                   <button onClick={() => updateQueueStatus(queue)}>Open/Close</button>
-                  <button>Manage Queue</button>
+                  <button onClick={() => setSelectedQueueId(queue.id)}>Manage Queue</button>
                 </div>
               </li>
             ))}
@@ -83,16 +87,23 @@ export default function Page() {
     )
   }
 
-  function ManageQueue(queue: Queue) {
+  function ManageQueue() {
+    return (
+      <div className={styles.mainContent}>
 
+      </div>
+    )
   }
 
   return (
     // must always return a root!
     <div className={styles.main}>
       <QueueList/>
-      
-      <Panel/>
+      {selectedQueue ? (
+        <ManageQueue queue={selectedQueue}/>
+      ) : (
+        <Panel />
+      )}
     </div>
   );
 }
