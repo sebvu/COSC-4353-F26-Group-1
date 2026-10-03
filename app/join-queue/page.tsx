@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { mockServices } from "../lib/mockData";
 import { useQueue } from "../lib/QueueContext";
 import styles from "../ui/join-queue/join-queue.module.css";
 
 export default function JoinQueuePage() {
+  const router = useRouter();
   const [selectedServiceId, setSelectedServiceId] = useState("");
   const { queueEntry, joinQueue, leaveQueue } = useQueue();
 
@@ -19,6 +21,7 @@ export default function JoinQueuePage() {
     }
 
     joinQueue(selectedService);
+    router.push("/queue-status");
   }
 
   return (
