@@ -1,4 +1,108 @@
-.text {
-  /* example color styling */
-  color: red;
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  margin: 4rem auto;
+  background-color: var(--secondary-pane1);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--surface0-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: var(--size-xl);
+  font-weight: bold;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+
+.label {
+  color: var(--subtext1-color);
+  margin-bottom: 0.5rem;
+  font-size: var(--size-sm);
+  font-weight: 500;
+}
+
+.input {
+  background-color: var(--background-pane);
+  color: var(--text-color);
+  border: 1px solid var(--surface1-color);
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: var(--size-rg);
+  transition:
+    border-color 0.2s ease,
+    outline 0.2s ease;
+}
+
+.input::placeholder {
+  color: var(--surface2-color);
+}
+
+.input:focus {
+  outline: 2px solid var(--blue-color);
+  border-color: transparent;
+}
+
+.inputError {
+  border-color: var(--red-color);
+}
+
+.inputError:focus {
+  outline: 2px solid var(--red-color);
+}
+
+.errorText {
+  color: var(--red-color);
+  font-size: var(--size-xs);
+  margin-top: 0.4rem;
+}
+
+.submitBtn {
+  background-color: var(--blue-color);
+  color: var(--background-pane);
+  padding: 0.85rem;
+  border-radius: 6px;
+  border: none;
+  font-size: var(--size-rg);
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.submitBtn:hover {
+  background-color: var(--lavender-color);
+}
+
+.toggleText {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: var(--size-sm);
+  color: var(--subtext0-color);
+}
+
+.toggleLink {
+  color: var(--blue-color);
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 0.25rem;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.toggleLink:hover {
+  text-decoration: underline;
+  color: var(--lavender-color);
 }
